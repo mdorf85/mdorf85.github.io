@@ -3,8 +3,8 @@
 # ----------------------- #
 
 url: http://mdorf85.github.io
-title: My Octopress Blog
-subtitle: A blogging framework for hackers.
+title: blog = true
+subtitle: Revelations from a Ruby Newbie.
 author: Michael Dorfman
 simple_search: https://www.google.com/search
 description:
