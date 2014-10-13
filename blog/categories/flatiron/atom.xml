@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Flatiron | My Octopress Blog]]></title>
+  <title><![CDATA[Category: Flatiron | blog = true]]></title>
   <link href="http://mdorf85.github.io/blog/categories/flatiron/atom.xml" rel="self"/>
   <link href="http://mdorf85.github.io/"/>
-  <updated>2014-10-01T22:45:49-04:00</updated>
+  <updated>2014-10-13T17:18:41-04:00</updated>
   <id>http://mdorf85.github.io/</id>
   <author>
     <name><![CDATA[Michael Dorfman]]></name>
@@ -12,6 +12,81 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Law And/&amp;&amp; Order]]></title>
+    <link href="http://mdorf85.github.io/blog/2014/10/13/law-and-slash-and-and-order/"/>
+    <updated>2014-10-13T15:20:55-04:00</updated>
+    <id>http://mdorf85.github.io/blog/2014/10/13/law-and-slash-and-and-order</id>
+    <content type="html"><![CDATA[<p>Something that affects nearly every line of code you write, but tends not to receive as much attention, or at least an exlsuive lesson when learning how to code is <strong>precedence</strong>, or the order in which operators are evaluated. Maybe that&rsquo;s because it&rsquo;s a somewhat cut and dry subject. What I mean by that is, once you know or reference this&hellip;</p>
+
+<p><a href="http://ruby-doc.org/core-2.1.3/doc/syntax/precedence_rdoc.html">Ruby&rsquo;s Table of Precedence</a></p>
+
+<p>&hellip;you&rsquo;re kind of all set.</p>
+
+<p>But that doesn&rsquo;t mean moments won&rsquo;t arise when your code isn&rsquo;t working the way you&rsquo;d like and precedence ends up being the culprit.</p>
+
+<p>Here&rsquo;s a simple assignment example where you might expect one thing, but get something totally different:</p>
+
+<pre><code class="ruby Ex. 1 "and versus &&"">a = 2 and b = 4
+puts "a = #{a}   b = #{b}"
+#=&gt;a = 2   b = 4
+</code></pre>
+
+<p>Ok, sure. But what about this?</p>
+
+<pre><code class="ruby Ex. 2 "and versus &&"">a = 2 &amp;&amp; b = 4
+puts "a = #{a}   b = #{b}"
+#=&gt;a = 4   b = 4
+</code></pre>
+
+<p>Woah&hellip;different.</p>
+
+<p>Well, it makes perfect sense if you refer to your handy table of order of precedence. Here is what happens chronologically in Ex. 1:</p>
+
+<p>1) the value 2 is assigned to the variable &lsquo;a&rsquo;<br>
+2) the value 4 is assgined to the variable &lsquo;b&rsquo;</p>
+
+<p>or</p>
+
+<pre><code class="ruby Ex. 1 Expressed parenthetically">(a = 2) and (b = 4)
+</code></pre>
+
+<p>Since &lsquo;=&rsquo; has a greater precedence than &lsquo;and&rsquo; this makese sense.</p>
+
+<p>In Ex. 2:</p>
+
+<p>1) the value 4 is assigned to the variable &lsquo;b&rsquo;<br>
+2) &lsquo;2 &amp;&amp; 4&rsquo; is evaluated, returning 4<br>
+3) the value 4 is assigned to the variable &lsquo;a&rsquo;</p>
+
+<p>or</p>
+
+<pre><code class="ruby Ex. 2 Expressed parenthetically">a = (2 &amp;&amp; (b = 4))
+a = (2 &amp;&amp; 4) #simplified
+</code></pre>
+
+<p>Once again it all comes down to &lsquo;&amp;&amp;&rsquo; having a higher order of precedence than &lsquo;=&rsquo; whereas that of &lsquo;and&rsquo; is lower than that of &lsquo;=&rsquo;.</p>
+
+<p>In step 2 in Example 2 you&rsquo;ll notice that &lsquo;2 &amp;&amp; 4&rsquo; returns &lsquo;4&rsquo;. That is due to the <strong>Associativity</strong> of &lsquo;&amp;&amp;&rsquo; which is left-to-right. This means &lsquo;2&rsquo; is evaluated first, followed by &lsquo;4&rsquo; which is returned.</p>
+
+<p>Finally, here&rsquo;s another quirk you might come across in Ruby&rsquo;s precedence rules:</p>
+
+<pre><code class="ruby Ex. 1 "&&/|| vs and/or"">true or true and false
+#=&gt;false
+</code></pre>
+
+<p>while</p>
+
+<pre><code class="ruby Ex. 2 "&&/|| vs and/or"">true || true &amp;&amp; false
+#=&gt;true
+</code></pre>
+
+<p>The difference in return values here boils down to &lsquo;and&rsquo; and &lsquo;or&rsquo; having identical precedence resulting in Ruby evaluating it left-to-right while &lsquo;&amp;&amp;&rsquo; having a higher precedence than &lsquo;||&rsquo; means &lsquo;true &amp;&amp; false&rsquo; receives first evaluation resulting in a &lsquo;true || false&rsquo; that returns true.</p>
+
+<p>In precedence, as with everything else in Ruby there are no surprises, so long as you know what to expect.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[My First Post on Octopress]]></title>
