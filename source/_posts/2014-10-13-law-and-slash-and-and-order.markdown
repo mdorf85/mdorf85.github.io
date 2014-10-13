@@ -6,7 +6,7 @@ comments: true
 categories: "Flatiron School"
 ---
 
-Something that affects nearly every line of code you write, but tends not to receive as much attention, or at least an exlsuive lesson when learning how to code is <strong>precedence</strong>, or the order in which operators are evaluated. Maybe that's because it's a somewhat cut and dry subject. What I mean by that is, once you know or reference this...
+Something that affects nearly every line of code you write, but tends not to receive too much attention is <strong>precedence</strong>, or the order in which operators are evaluated. Maybe that's because it's a somewhat cut and dry subject. What I mean by that is, once you know or reference this...
 
 <a href="http://ruby-doc.org/core-2.1.3/doc/syntax/precedence_rdoc.html">Ruby's Table of Precedence</a>
 
