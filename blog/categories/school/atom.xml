@@ -4,7 +4,7 @@
   <title><![CDATA[Category: School | blog = true]]></title>
   <link href="http://mdorf85.github.io/blog/categories/school/atom.xml" rel="self"/>
   <link href="http://mdorf85.github.io/"/>
-  <updated>2014-10-13T17:18:41-04:00</updated>
+  <updated>2014-10-13T17:22:40-04:00</updated>
   <id>http://mdorf85.github.io/</id>
   <author>
     <name><![CDATA[Michael Dorfman]]></name>
@@ -18,7 +18,7 @@
     <link href="http://mdorf85.github.io/blog/2014/10/13/law-and-slash-and-and-order/"/>
     <updated>2014-10-13T15:20:55-04:00</updated>
     <id>http://mdorf85.github.io/blog/2014/10/13/law-and-slash-and-and-order</id>
-    <content type="html"><![CDATA[<p>Something that affects nearly every line of code you write, but tends not to receive as much attention, or at least an exlsuive lesson when learning how to code is <strong>precedence</strong>, or the order in which operators are evaluated. Maybe that&rsquo;s because it&rsquo;s a somewhat cut and dry subject. What I mean by that is, once you know or reference this&hellip;</p>
+    <content type="html"><![CDATA[<p>Something that affects nearly every line of code you write, but tends not to receive too much attention is <strong>precedence</strong>, or the order in which operators are evaluated. Maybe that&rsquo;s because it&rsquo;s a somewhat cut and dry subject. What I mean by that is, once you know or reference this&hellip;</p>
 
 <p><a href="http://ruby-doc.org/core-2.1.3/doc/syntax/precedence_rdoc.html">Ruby&rsquo;s Table of Precedence</a></p>
 
