@@ -1,0 +1,79 @@
+---
+layout: post
+title: "Mass Assignment: The Good, the Bad and the HOLY-MOTHER-OF-GOD-HACKER-INDUCED-NIGHTMARE"
+date: 2014-10-26 16:51:45 -0400
+comments: true
+categories: flatiron school
+---
+
+Let's talk about Ruby's <strong>Mass Assignment</strong> feature.
+
+"Massignment" as no one calls it to my knowledge, allows for the programmer to assign a mass number of things. Usually in a single step. Well, let's look at a few examples in the scope of just Ruby.
+
+Here's a thing you can do:
+
+``` ruby Massignment Ex. 1
+a, b, c = 1, 2, 3
+#=>a = 1   b = 2   c = 3
+```
+
+Simple, intuitive and potentially useful.
+
+Here's another thing one might do:
+
+``` ruby Massignment Ex. 2
+abc_arr = (a, b, c = 1, 2, 3)
+#=>a = 1   b = 2   c = 3
+#=>abc_arr = [1, 2, 3]
+```
+
+Slightly less obvious. Well, this being Ruby, every operation yields a return value and mass assignment is no exception. As you can see, the assignment itself returns a value of the array of values that were assigned.
+
+Neat.
+
+Widening our scope from standalone Ruby console to any Rails-like environment, Mass Assignment takes on new roles. Particularly in the ever-relied on <code>params</code> hash in which values are assigned, for example, based on encoding in the URL of a HTTP GET request or from form data of a POST request.
+
+So in the spirit of the latter, take a simple website form asking for the user's name that corresponds to a table with schema such as:
+
+``` ruby Massignment Ex. 3
+t.string :name
+t.boolean :admin, default: false, null: false
+```
+
+Say in its corresponding Controller's code, something like this line existed:
+
+``` ruby Massignment Ex. 3
+@user = User.new(params[:user])
+```
+
+This means everything in the <code>params</code> hash will be mass assigned to the available attributes. An ill-intentioned user then might suspect - based on strong Rails conventions - that an <code>admin</code> attribute might exist and submit to the name form something roughly like:
+
+<form action="none" method="get">
+  Name: <input type="text" name="example" value="user[name]=hacker&user[admin]=1" size="40" readonly><br>
+</form>
+
+This could potentially be processed by the <code>params</code> hash as:
+
+``` ruby Massignment Ex. 3
+params = {:name => "hacker", :admin => 1}
+```
+
+And well you get the idea. The user has set his <code>admin</code> privilege to <code>true</code> and that's a bad thing.
+
+As it so happened, all this was pointed out as a vulnerability when in early 2012, Egor Homakov <a href="http://www.zdnet.com/github-suspends-member-over-mass-assignment-hack-4010025556/" target="_blank">more or less did this</a> on Github (a rails-based codebase). He gave himself the ability to commit a file to the Ruby on Rails project, and added some harmless files and <a href ="https://github.com/rails/rails/issues/5239" target-"_blank">posts</a> before Github acted and eventually publicly thanked him for his illumination of the issue.
+
+It was all kind of like:
+
+<img src="http://img-9gag-lol.9cache.com/photo/5262242_700b_v1.jpg">
+
+Anyway that was all a couple years ago which in the coding world is like a couple lightyears ago and so solutions and fixes that I'm likely not even aware of have near-vanquished this bug.  One simple mitigation is making use of the <code>attr_protected</code> tool which specifies what fields may <strong>never</strong> be mass-assigned. You can also use its opposite <code>attr_accessible</code>, which allows you to list those attributes that can be mass-assigned.
+
+Futhermore, incorporating a gem known as <a href="https://github.com/rails/strong_parameters">Strong Parameters</a> will include these protections in your Model/Controller.
+
+So yeah, Mass Assignment is an example of something that on the outside is a total intuitive timesaver, but as we learned:
+
+"...with great convenience comes great potential for a total fucking meltdown."
+
+Or something.
+
+
