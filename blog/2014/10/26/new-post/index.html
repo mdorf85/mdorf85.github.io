@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>blog = true</title>
+  <title>Mass Assignment: The Good, the Bad and the HOLY-MOTHER-OF-GOD-HACKER-INDUCED-NIGHTMARE - blog = true</title>
   <meta name="author" content="Michael Dorfman">
 
   
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://mdorf85.github.io">
+  <link rel="canonical" href="http://mdorf85.github.io/blog/2014/10/26/new-post">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="blog = true" type="application/atom+xml">
@@ -63,15 +63,12 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2014/10/26/new-post/">Mass Assignment: The Good, the Bad and the HOLY-MOTHER-OF-GOD-HACKER-INDUCED-NIGHTMARE</a></h1>
+      <h1 class="entry-title">Mass Assignment: The Good, the Bad and the HOLY-MOTHER-OF-GOD-HACKER-INDUCED-NIGHTMARE</h1>
     
     
       <p class="meta">
@@ -87,7 +84,7 @@
   </header>
 
 
-  <div class="entry-content"><p>Let&rsquo;s talk about Ruby&rsquo;s <strong>Mass Assignment</strong> feature.</p>
+<div class="entry-content"><p>Let&rsquo;s talk about Ruby&rsquo;s <strong>Mass Assignment</strong> feature.</p>
 
 <p>&ldquo;Massignment&rdquo; as no one calls it to my knowledge, allows for the programmer to assign a mass number of things. Usually in a single step. Well, let&rsquo;s look at a few examples in the scope of just Ruby.</p>
 
@@ -166,161 +163,52 @@
 
 <p>Or something.</p>
 </div>
-  
-  
 
 
-    </article>
-  
-  
-    <article>
+  <footer>
+    <p class="meta">
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/10/13/law-and-slash-and-and-order/">Law And/&amp;&amp; Order</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-10-13T15:20:55-04:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>13</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>3:20 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Something that affects nearly every line of code you write, but tends not to receive too much attention is <strong>precedence</strong>, or the order in which operators are evaluated. Maybe that&rsquo;s because it&rsquo;s a somewhat cut and dry subject. What I mean by that is, once you know or reference this&hellip;</p>
-
-<p><a href="http://ruby-doc.org/core-2.1.3/doc/syntax/precedence_rdoc.html">Ruby&rsquo;s Table of Precedence</a></p>
-
-<p>&hellip;you&rsquo;re kind of all set.</p>
-
-<p>But that doesn&rsquo;t mean moments won&rsquo;t arise when your code isn&rsquo;t working the way you&rsquo;d like and precedence ends up being the culprit.</p>
-
-<p>Here&rsquo;s a simple assignment example where you might expect one thing, but get something totally different:</p>
-
-<figure class='code'><figcaption><span>Ex. 1 &#8220;and versus &&&#8221;</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">4</span>
-</span><span class='line'><span class="nb">puts</span> <span class="s2">&quot;a = </span><span class="si">#{</span><span class="n">a</span><span class="si">}</span><span class="s2">   b = </span><span class="si">#{</span><span class="n">b</span><span class="si">}</span><span class="s2">&quot;</span>
-</span><span class='line'><span class="c1">#=&gt;a = 2   b = 4</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Ok, sure. But what about this?</p>
-
-<figure class='code'><figcaption><span>Ex. 2 &#8220;and versus &&&#8221;</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">&amp;&amp;</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">4</span>
-</span><span class='line'><span class="nb">puts</span> <span class="s2">&quot;a = </span><span class="si">#{</span><span class="n">a</span><span class="si">}</span><span class="s2">   b = </span><span class="si">#{</span><span class="n">b</span><span class="si">}</span><span class="s2">&quot;</span>
-</span><span class='line'><span class="c1">#=&gt;a = 4   b = 4</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Woah&hellip;different.</p>
-
-<p>Well, it makes perfect sense if you refer to your handy table of order of precedence. Here is what happens chronologically in Ex. 1:</p>
-
-<p>1) the value 2 is assigned to the variable &lsquo;a&rsquo;<br>
-2) the value 4 is assgined to the variable &lsquo;b&rsquo;</p>
-
-<p>or</p>
-
-<figure class='code'><figcaption><span>Ex. 1 Expressed parenthetically</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="p">(</span><span class="n">a</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">b</span> <span class="o">=</span> <span class="mi">4</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Since &lsquo;=&rsquo; has a greater precedence than &lsquo;and&rsquo; this makese sense.</p>
-
-<p>In Ex. 2:</p>
-
-<p>1) the value 4 is assigned to the variable &lsquo;b&rsquo;<br>
-2) &lsquo;2 &amp;&amp; 4&rsquo; is evaluated, returning 4<br>
-3) the value 4 is assigned to the variable &lsquo;a&rsquo;</p>
-
-<p>or</p>
-
-<figure class='code'><figcaption><span>Ex. 2 Expressed parenthetically</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">b</span> <span class="o">=</span> <span class="mi">4</span><span class="p">))</span>
-</span><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span> <span class="o">&amp;&amp;</span> <span class="mi">4</span><span class="p">)</span> <span class="c1">#simplified</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Once again it all comes down to &lsquo;&amp;&amp;&rsquo; having a higher order of precedence than &lsquo;=&rsquo; whereas that of &lsquo;and&rsquo; is lower than that of &lsquo;=&rsquo;.</p>
-
-<p>In step 2 in Example 2 you&rsquo;ll notice that &lsquo;2 &amp;&amp; 4&rsquo; returns &lsquo;4&rsquo;. That is due to the <strong>Associativity</strong> of &lsquo;&amp;&amp;&rsquo; which is left-to-right. This means &lsquo;2&rsquo; is evaluated first, followed by &lsquo;4&rsquo; which is returned.</p>
-
-<p>Finally, here&rsquo;s another quirk you might come across in Ruby&rsquo;s precedence rules:</p>
-
-<figure class='code'><figcaption><span>Ex. 1 &#8220;&&/|| vs and/or&#8221;</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="kp">true</span> <span class="ow">or</span> <span class="kp">true</span> <span class="ow">and</span> <span class="kp">false</span>
-</span><span class='line'><span class="c1">#=&gt;false</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>while</p>
-
-<figure class='code'><figcaption><span>Ex. 2 &#8220;&&/|| vs and/or&#8221;</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="kp">true</span> <span class="o">||</span> <span class="kp">true</span> <span class="o">&amp;&amp;</span> <span class="kp">false</span>
-</span><span class='line'><span class="c1">#=&gt;true</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The difference in return values here boils down to &lsquo;and&rsquo; and &lsquo;or&rsquo; having identical precedence resulting in Ruby evaluating it left-to-right while &lsquo;&amp;&amp;&rsquo; having a higher precedence than &lsquo;||&rsquo; means &lsquo;true &amp;&amp; false&rsquo; receives first evaluation resulting in a &lsquo;true || false&rsquo; that returns true.</p>
-
-<p>In precedence, as with everything else in Ruby there are no surprises, so long as you know what to expect.</p>
-</div>
-  
   
 
+<span class="byline author vcard">Posted by <span class="fn">Michael Dorfman</span></span>
 
-    </article>
-  
-  
-    <article>
       
-  <header>
+
+
+
+
+<time class='entry-date' datetime='2014-10-26T16:51:45-04:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>26</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>4:51 pm</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/flatiron/'>flatiron</a>, <a class='category' href='/blog/categories/school/'>school</a>
+  
+</span>
+
+
+    </p>
     
-      <h1 class="entry-title"><a href="/blog/2014/10/01/my-first-post-on-octopress/">My First Post on Octopress</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-10-01T22:38:41-04:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2014</span></span> <span class='time'>10:38 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>&ldquo;Hello World!&rdquo;</p>
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://mdorf85.github.io/blog/2014/10/26/new-post/" data-via="" data-counturl="http://mdorf85.github.io/blog/2014/10/26/new-post/" >Tweet</a>
+  
+  
+  
 </div>
-  
-  
 
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/10/13/law-and-slash-and-and-order/" title="Previous Post: Law and/&amp;&amp; Order">&laquo; Law and/&amp;&amp; Order</a>
+      
+      
+    </p>
+  </footer>
+</article>
 
-    </article>
-  
-  <div class="pagination">
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
 </div>
+
 <aside class="sidebar">
   
     <section>
@@ -348,6 +236,7 @@
 
   
 </aside>
+
 
     </div>
   </div>
