@@ -1,0 +1,207 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Life After Flatiron - blog = true</title>
+  <meta name="author" content="Michael Dorfman">
+
+  
+  <meta name="description" content="It&rsquo;s been just over six weeks since I began my undertaking at The Flatiron School - right around the halfway mark - and I could not be happier &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://mdorf85.github.io/blog/2014/11/11/life-after-flatiron">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="blog = true" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">blog = true</a></h1>
+  
+    <h2>Revelations from a Ruby Newbie.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:mdorf85.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Life After Flatiron</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-11-11T01:33:44-05:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>11</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>1:33 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>It&rsquo;s been just over six weeks since I began my undertaking at The Flatiron School - right around the halfway mark - and I could not be happier with the progress I&rsquo;ve made. From basic programming in Ruby to building web applications using the Rails framework and now venturing into the unknown, once again, with JavaScript it really is astounding to think how much is crammable into a month and a half. As one might guess, this doesn&rsquo;t come without a lot of hard work at an unrelenting pace.</p>
+
+<p><img class="center" src="http://www.vendoralley.com/wp-content/uploads/2013/05/doorsteps_logo_410x295.png" alt="Doorsteps Logo" height=400 width=400></p>
+
+<p>With that in mind, it made my mentor meeting last Friday with Flatiron Alumnus Andrew Callahan all the more refreshing. Andrew, a graduate of Ruby-001, was kind enough to have me at his workplace, appropriately tucked away in the Flatiron District. Andrew, after a 9-month long stint programming for Skift (a travel website) right out of Flatiron, is a software engineer at the startup <a href="http://www.doorsteps.com" target="_blank">Doorsteps</a>.</p>
+
+<p>Doorsteps has set out to make the process of how people find, finance and buy homes easier and a more pleasant one. For consumers this comes at no cost. On the seller side, there are various financial plans available. What Doorsteps offers is a state of the art front-end design making the task of searching for and/or browsing real estate more user friendly and easier on the eyes than alternatives, like say, Craigslist.</p>
+
+<p>Upon my arrival, Andrew ushered me into a room with a large table set up with oversize monitors and able to accomodate several developers. We immediately got started on a &ldquo;story&rdquo;, aka a short snippet about some change that is to be made to the main application. Each story is designated both a priority and a star rating pertaining to its potential complexity. Although I was on hand with my keen programming senses and vast knowledge of web development, we thought it better to go with a 1-star (lowest difficulty) task. This was, in short, to remove the &ldquo;Created At&rdquo; field for property show pages as product management deemed it potentially suggestive of old and/or outdated listings.</p>
+
+<p>By the way, Doorsteps uses a nifty project management suite called <a href="http://www.pivotaltracker.com/" target="_blank">Pivotal Tracker</a> to implement the aforementioned system. From there we took to Git-catered version control, checking out a new branch to begin the removal of &ldquo;Created At&rdquo; in the Rails-frameworked application. In the spirit of test driven development, after paging through Sublime Text tabs and eliminating lines of Haml (an alternative to ERB) in view files, we made sure to remove any corresponding tests in RSpec. As has been my experience with nearly every foray into programming I&rsquo;ve had, results other than those that were solely intended came from the changes that we made. Namely, some logic governing the difference between posts of individual realty units versus larger properties had to be addressed. A slight tweak of an <code>if-else</code> statement later, and everything appeared to be in working order. End of story, so to speak.</p>
+
+<p>As Andrew reiterated, this workflow was very representative of what he does at Doorsteps. I had a number of takeaways from being exposed to this bit of &ldquo;real life&rdquo; development, but first and foremost was that everything we did, to varied extents, has been taught and instilled in us at Flatiron. Guess we haven&rsquo;t just been solving labs by the dozens for the hell of it after all - big relief! But seriously, it really left an impression with me how much of what we have learned in our small time at Flatiron has equipped us for the workforce. Beyond this realization, I also was happy to have found the work not only productive and efficient, but rewarding and fun. Wielding the power to make immediate changes and impact on such a large project is a real privilege.</p>
+
+<p>Doorsteps was recently acquired by Move, Inc., operators of the leading real estate provider site <a href="http://www.realtor.com/" target="_blank">realtor.com®</a>. This  should provide Doorsteps with a wealth of resources and the means to achieve its vision as a cornerstone in the realty business in even quicker fashion. As such, there is a buzz about the office (detectable even on a Friday evening in a more so than usual vacant setting) and a general feeling of excitement toward what the future holds. Thanks to Flatiron&rsquo;s Mentor Program and Andrew&rsquo;s willingness to take the time to host me, I&rsquo;m grateful to have had the chance I did to participate and bear witness to it.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Michael Dorfman</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2014-11-11T01:33:44-05:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>11</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>1:33 am</span></time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://mdorf85.github.io/blog/2014/11/11/life-after-flatiron/" data-via="" data-counturl="http://mdorf85.github.io/blog/2014/11/11/life-after-flatiron/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/10/26/new-post/" title="Previous Post: Mass Assignment: The Good, the Bad and the HOLY-MOTHER-OF-GOD-HACKER-INDUCED-NIGHTMARE">&laquo; Mass Assignment: The Good, the Bad and the HOLY-MOTHER-OF-GOD-HACKER-INDUCED-NIGHTMARE</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/11/11/life-after-flatiron/">Life After Flatiron</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/10/26/new-post/">Mass Assignment: The Good, the Bad and the HOLY-MOTHER-OF-GOD-HACKER-INDUCED-NIGHTMARE</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/10/13/law-and-slash-and-and-order/">Law And/&amp;&amp; Order</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/10/01/my-first-post-on-octopress/">My First Post on Octopress</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Michael Dorfman -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
