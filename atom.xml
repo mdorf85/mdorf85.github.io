@@ -4,7 +4,7 @@
   <title><![CDATA[blog = true]]></title>
   <link href="http://mdorf85.github.io/atom.xml" rel="self"/>
   <link href="http://mdorf85.github.io/"/>
-  <updated>2014-11-11T01:37:47-05:00</updated>
+  <updated>2014-12-03T00:01:10-05:00</updated>
   <id>http://mdorf85.github.io/</id>
   <author>
     <name><![CDATA[Michael Dorfman]]></name>
@@ -12,6 +12,59 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Data...going...going...gon!]]></title>
+    <link href="http://mdorf85.github.io/blog/2014/12/02/data-going-going-gon/"/>
+    <updated>2014-12-02T22:50:37-05:00</updated>
+    <id>http://mdorf85.github.io/blog/2014/12/02/data-going-going-gon</id>
+    <content type="html"><![CDATA[<p>It&rsquo;s no secret that passing code in Ruby (or any other language) can be a pain when it eventually needs to be rendered in JavaScript. In Rails, specifically, there are several ways to go about the often painstaking process.</p>
+
+<p>Rails comes with the method <code>escape_javascript</code> that goes under the popular monogrammatic alias <code>j</code>which you can utilize in your view. For instance:</p>
+
+<figure class='code'><figcaption><span>JavaScript in Rails Ex. 1</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="err">$</span><span class="p">(</span><span class="s1">&#39;some_element&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replaceWith</span><span class="p">(</span><span class="s1">&#39;&lt;%=j render &#39;</span><span class="n">some</span><span class="o">/</span><span class="n">element_template</span><span class="s1">&#39; %&gt;&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And that should work.</p>
+
+<p>Another way to go about this, especially if you&rsquo;re working out of a database, is to parse your code to a json. This can be done on a per record basis using <code>to_json</code> of course. Because of their object literal notation, JSONs are a pleasure to deal with in JavaScript land.</p>
+
+<p>Finally and most excitedly - not only because it is the inspiration for this post&rsquo;s title, but more so because I found it exceptionally easy to implement - is a nifty little gem called <a href="https://github.com/gazay/gon" target="_blank">gon</a>.</p>
+
+<p>A brief sift through its documentation is all it takes for one to get the gist of it (something I&rsquo;ve really come to appreciate the more I deal with gems and libraries who either have overly meticulous documentation or on the flip side none to speak of at all). Here&rsquo;s how it works:</p>
+
+<ol>
+  <li>Include gem and bundle install.</li>
+  <li>Add <code><%= include_gon %></code> to the application.html.erb file.</li>
+  <li>Use it as such&#8230;</li>
+</ol>
+
+
+<p>In your respective controller:</p>
+
+<figure class='code'><figcaption><span>JavaScript in Rails Ex. 2</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">arr</span> <span class="o">=</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="o">]</span>
+</span><span class='line'><span class="n">gon</span><span class="o">.</span><span class="n">arr</span> <span class="o">=</span> <span class="n">arr</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">hash</span> <span class="o">=</span> <span class="p">{</span><span class="ss">a</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="ss">b</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+</span><span class='line'><span class="n">gon</span><span class="o">.</span><span class="n">hash</span> <span class="o">=</span> <span class="nb">hash</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And that&rsquo;s it. You have access to <code>gon.arr</code> and <code>gon.hash</code> in your javascript files.</p>
+
+<p>This convenient meandering through and about the asset pipeline in Rails can be a real timesaver. Thanks gon!</p>
+
+<p><img src="http://media.giphy.com/media/7P1gGxP4GBH0s/giphy.gif" style="width:400px;height:325px">
+</br>gon: almost as fun as gong.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Life After Flatiron]]></title>
