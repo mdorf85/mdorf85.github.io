@@ -9,7 +9,7 @@
   <meta name="author" content="Michael Dorfman">
 
   
-  <meta name="description" content="It&rsquo;s no secret that passing code in Ruby (or any other language) can be a pain when it eventually needs to be rendered in JavaScript. In Rails &hellip;">
+  <meta name="description" content="To get right into it, I was working in JavaScript, and it being JavaScript functions were within functions and it was a callback treat. Here&rsquo;s &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,6 +65,81 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/12/08/event-delegation-aka-triggering-the-bubble/">Event Delegation Aka Triggering the Bubble</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-12-08T23:40:11-05:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>8</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>11:40 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>To get right into it, I was working in JavaScript, and it being JavaScript functions were within functions and it was a callback treat. Here&rsquo;s an excerpt:</p>
+
+<figure class='code'><figcaption><span>BEFORE</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'>    <span class="nx">eventRender</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">element</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">element</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span> <span class="s2">&quot;&lt;span class=&#39;closon&#39;&gt;X&lt;/span&gt;&quot;</span> <span class="p">);</span>
+</span><span class='line'>          <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;.closon&quot;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>           <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">parent</span><span class="p">().</span><span class="nx">remove</span><span class="p">();</span>
+</span><span class='line'>        <span class="p">});</span>
+</span><span class='line'>    <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>What I wanted to accomplish - but with zero success up to that point - was appending a <code>span</code> element after the page was loaded with a <code>class=&ldquo;closon&rdquo;</code> that comprised a single <strong>X</strong> to be used as an exit button in its parent <code>div</code>.</p>
+
+<p>The problem as I learned from consulting everyone&rsquo;s good friend <a href='http://stackoverflow.com/questions/19393656/span-jquery-click-not-working'>Stack Overflow</a>, was that since the <code>span</code> was being added dynamically after the page loaded, there was no event handler for it.</p>
+
+<p>The solution was Event Delegation.</p>
+
+<figure class='code'><figcaption><span>AFTER</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'>    <span class="nx">eventRender</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">element</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">element</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span> <span class="s2">&quot;&lt;span class=&#39;closon&#39;&gt;X&lt;/span&gt;&quot;</span> <span class="p">);</span>
+</span><span class='line'>          <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="s2">&quot;.closon&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>           <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">parent</span><span class="p">().</span><span class="nx">remove</span><span class="p">();</span>
+</span><span class='line'>        <span class="p">});</span>
+</span><span class='line'>    <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>By passing the second paramter, the event handler knows to listen for the &ldquo;click&rdquo; event and check to see if the trigger matches <code>&ldquo;.closon&rdquo;</code>.</p>
+
+<p>With that I was able to click on the <strong>X</strong> and have the element disappear from the DOM. We had triggered the proper bubbling.</p>
+
+<p>So badass:</p>
+
+<p><img src="http://worth1000.s3.amazonaws.com/submissions/540000/540408_addc_625x1000.jpg"></p>
+
+<p>For an additional helpful run through on Event Delegation visit jQuery&rsquo;s <a href="http://learn.jquery.com/events/event-delegation/">Understanding Event Delegation</a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -444,6 +519,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/12/08/event-delegation-aka-triggering-the-bubble/">Event Delegation Aka Triggering the Bubble</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/12/02/data-going-going-gon/">Data&#8230;going&#8230;going&#8230;gon!</a>
       </li>
     
@@ -457,10 +536,6 @@
     
       <li class="post">
         <a href="/blog/2014/10/13/law-and-slash-and-and-order/">Law And/&amp;&amp; Order</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/10/01/my-first-post-on-octopress/">My First Post on Octopress</a>
       </li>
     
   </ul>

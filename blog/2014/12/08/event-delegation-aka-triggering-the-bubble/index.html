@@ -1,0 +1,243 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Event Delegation Aka Triggering the Bubble - blog = true</title>
+  <meta name="author" content="Michael Dorfman">
+
+  
+  <meta name="description" content="To get right into it, I was working in JavaScript, and it being JavaScript functions were within functions and it was a callback treat. Here&rsquo;s &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://mdorf85.github.io/blog/2014/12/08/event-delegation-aka-triggering-the-bubble">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="blog = true" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">blog = true</a></h1>
+  
+    <h2>Revelations from a Ruby Newbie.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:mdorf85.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Event Delegation Aka Triggering the Bubble</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-12-08T23:40:11-05:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>8</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>11:40 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>To get right into it, I was working in JavaScript, and it being JavaScript functions were within functions and it was a callback treat. Here&rsquo;s an excerpt:</p>
+
+<figure class='code'><figcaption><span>BEFORE</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'>    <span class="nx">eventRender</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">element</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">element</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span> <span class="s2">&quot;&lt;span class=&#39;closon&#39;&gt;X&lt;/span&gt;&quot;</span> <span class="p">);</span>
+</span><span class='line'>          <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;.closon&quot;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>           <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">parent</span><span class="p">().</span><span class="nx">remove</span><span class="p">();</span>
+</span><span class='line'>        <span class="p">});</span>
+</span><span class='line'>    <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>What I wanted to accomplish - but with zero success up to that point - was appending a <code>span</code> element after the page was loaded with a <code>class=&ldquo;closon&rdquo;</code> that comprised a single <strong>X</strong> to be used as an exit button in its parent <code>div</code>.</p>
+
+<p>The problem as I learned from consulting everyone&rsquo;s good friend <a href='http://stackoverflow.com/questions/19393656/span-jquery-click-not-working'>Stack Overflow</a>, was that since the <code>span</code> was being added dynamically after the page loaded, there was no event handler for it.</p>
+
+<p>The solution was Event Delegation.</p>
+
+<figure class='code'><figcaption><span>AFTER</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'>    <span class="nx">eventRender</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">element</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">element</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span> <span class="s2">&quot;&lt;span class=&#39;closon&#39;&gt;X&lt;/span&gt;&quot;</span> <span class="p">);</span>
+</span><span class='line'>          <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="s2">&quot;.closon&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>           <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">parent</span><span class="p">().</span><span class="nx">remove</span><span class="p">();</span>
+</span><span class='line'>        <span class="p">});</span>
+</span><span class='line'>    <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>By passing the second paramter, the event handler knows to listen for the &ldquo;click&rdquo; event and check to see if the trigger matches <code>&ldquo;.closon&rdquo;</code>.</p>
+
+<p>With that I was able to click on the <strong>X</strong> and have the element disappear from the DOM. We had triggered the proper bubbling.</p>
+
+<p>So badass:</p>
+
+<p><img src="http://worth1000.s3.amazonaws.com/submissions/540000/540408_addc_625x1000.jpg"></p>
+
+<p>For an additional helpful run through on Event Delegation visit jQuery&rsquo;s <a href="http://learn.jquery.com/events/event-delegation/">Understanding Event Delegation</a></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Michael Dorfman</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2014-12-08T23:40:11-05:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>8</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>11:40 pm</span></time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://mdorf85.github.io/blog/2014/12/08/event-delegation-aka-triggering-the-bubble/" data-via="" data-counturl="http://mdorf85.github.io/blog/2014/12/08/event-delegation-aka-triggering-the-bubble/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/12/02/data-going-going-gon/" title="Previous Post: Data...going...going...gon!">&laquo; Data&#8230;going&#8230;going&#8230;gon!</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/12/08/event-delegation-aka-triggering-the-bubble/">Event Delegation Aka Triggering the Bubble</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/12/02/data-going-going-gon/">Data&#8230;going&#8230;going&#8230;gon!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/11/11/life-after-flatiron/">Life After Flatiron</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/10/26/new-post/">Mass Assignment: The Good, the Bad and the HOLY-MOTHER-OF-GOD-HACKER-INDUCED-NIGHTMARE</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/10/13/law-and-slash-and-and-order/">Law And/&amp;&amp; Order</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Michael Dorfman -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
